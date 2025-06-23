@@ -24,7 +24,6 @@ class ShowThemeViewSet(
 ):
     queryset = ShowTheme.objects.all()
     serializer_class = ShowThemeSerializer
-    permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
 
 class AstronomyShowViewSet(
@@ -35,7 +34,6 @@ class AstronomyShowViewSet(
 ):
     queryset = AstronomyShow.objects.prefetch_related("show_themes")
     serializer_class = AstronomyShowSerializer
-    permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
 
 class PlanetariumDomeViewSet(
@@ -46,7 +44,6 @@ class PlanetariumDomeViewSet(
 ):
     queryset = PlanetariumDome.objects.all()
     serializer_class = PlanetariumDomeSerializer
-    permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
 
 class ReservationViewSet(
@@ -57,7 +54,6 @@ class ReservationViewSet(
 ):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
-    permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
 
 class ShowSessionViewSet(
@@ -71,7 +67,6 @@ class ShowSessionViewSet(
         "planetarium_dome"
     )
     serializer_class = ShowSessionSerializer
-    permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
 
 class TicketViewSet(
@@ -85,4 +80,3 @@ class TicketViewSet(
         "reservation"
     )
     serializer_class = ShowSessionSerializer
-    permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)

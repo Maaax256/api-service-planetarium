@@ -1,4 +1,8 @@
-from drf_spectacular.utils import extend_schema, extend_schema_view
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
+from rest_framework import status
+
+from planetarium.serializers import ShowThemeSerializer
 from planetarium.views import (
     ShowThemeViewSet,
     AstronomyShowViewSet,
@@ -13,6 +17,14 @@ ShowThemeViewSet = extend_schema_view(
     list=extend_schema(
         summary="List all show themes",
         description="Retrieve a list of all available show themes.",
+        parameters=[
+            OpenApiParameter(
+                name="name",
+                description="Filter by name",
+                required=False,
+                type=OpenApiTypes.STR,
+            ),
+        ],
     ),
     create=extend_schema(
         summary="Create a new show theme",

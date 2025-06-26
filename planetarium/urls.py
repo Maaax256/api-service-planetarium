@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from planetarium.views import (
+from planetarium.schemas import (
     ShowThemeViewSet,
     AstronomyShowViewSet,
     PlanetariumDomeViewSet,

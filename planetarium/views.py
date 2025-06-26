@@ -7,7 +7,6 @@ from planetarium.models import (
     Reservation,
     ShowSession
 )
-from planetarium.permissions import IsAdminOrIfAuthenticatedReadOnly
 from planetarium.serializers import (
     ShowThemeSerializer,
     AstronomyShowSerializer,
@@ -24,6 +23,14 @@ class ShowThemeViewSet(
 ):
     queryset = ShowTheme.objects.all()
     serializer_class = ShowThemeSerializer
+
+    def get_queryset(self):
+        queryset = ShowTheme.objects.all()
+        if self.action == "list":
+            name = self.request.query_params.get("name")
+            if name:
+                queryset = queryset.filter(name__icontains=name)
+        return queryset
 
 
 class AstronomyShowViewSet(

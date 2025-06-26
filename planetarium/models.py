@@ -19,9 +19,15 @@ class PlanetariumDome(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+
 
 class ShowTheme(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class AstronomyShow(models.Model):
@@ -31,6 +37,9 @@ class AstronomyShow(models.Model):
         ShowTheme,
         related_name="astronomy_shows"
     )
+
+    def __str__(self):
+        return self.title
 
 
 class ShowSession(models.Model):

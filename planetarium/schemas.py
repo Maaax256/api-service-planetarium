@@ -58,10 +58,6 @@ PlanetariumDomeViewSet = extend_schema_view(
         summary="Create a new planetarium dome",
         description="Add a new planetarium dome to the database.",
     ),
-    retrieve=extend_schema(
-        summary="Retrieve a planetarium dome",
-        description="Get details of a specific planetarium dome by ID.",
-    ),
 )(PlanetariumDomeViewSet)
 
 
@@ -105,9 +101,5 @@ TicketViewSet = extend_schema_view(
     create=extend_schema(
         summary="Create a new ticket",
         description="Add a new ticket to the database.",
-    ),
-    retrieve=extend_schema(
-        summary="Retrieve a ticket",
-        description="Get details of a specific ticket by ID.",
     ),
 )(TicketViewSet)

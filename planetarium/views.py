@@ -46,7 +46,6 @@ class AstronomyShowViewSet(
 class PlanetariumDomeViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
     viewsets.GenericViewSet,
 ):
     queryset = PlanetariumDome.objects.all()
@@ -79,7 +78,6 @@ class ShowSessionViewSet(
 class TicketViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
     viewsets.GenericViewSet,
 ):
     queryset = ShowSession.objects.select_related(

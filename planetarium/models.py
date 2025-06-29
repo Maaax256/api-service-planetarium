@@ -15,7 +15,7 @@ class Reservation(models.Model):
 
 
 class PlanetariumDome(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
 
@@ -24,7 +24,7 @@ class PlanetariumDome(models.Model):
 
 
 class ShowTheme(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -55,6 +55,9 @@ class ShowSession(models.Model):
     )
     show_time = models.DateTimeField()
 
+    class Meta:
+        unique_together = ("planetarium_dome", "show_time")
+
 
 class Ticket(models.Model):
     row = models.IntegerField()
@@ -66,8 +69,10 @@ class Ticket(models.Model):
     )
     reservation = models.ForeignKey(
         Reservation,
-        on_delete=models.DO_NOTHING,
-        related_name="tickets"
+        on_delete=models.SET_NULL,
+        related_name="tickets",
+        null=True,
+        blank=True
     )
 
     class Meta:

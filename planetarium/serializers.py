@@ -10,9 +10,24 @@ from planetarium.models import (
 
 
 class ReservationSerializer(serializers.ModelSerializer):
+    ticket_ids = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True
+    )
+
     class Meta:
         model = Reservation
-        fields = ("id", "created_at", "user")
+        fields = ("id", "created_at", "user", "ticket_ids")
+        read_only_fields = ("id", "created_at", "user")
+
+    def create(self, validated_data):
+        ticket_ids = validated_data.pop("ticket_ids")
+        user = self.context["request"].user
+        reservation = Reservation.objects.create(user=user)
+        Ticket.objects.filter(
+            id__in=ticket_ids,
+            reservation__isnull=True
+        ).update(reservation=reservation)
+        return reservation
 
 
 class PlanetariumDomeSerializer(serializers.ModelSerializer):

@@ -61,6 +61,9 @@ class ReservationViewSet(
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
 
+    def perform_create(self, serializer):
+        serializer.save()
+
 
 class ShowSessionViewSet(
     mixins.ListModelMixin,

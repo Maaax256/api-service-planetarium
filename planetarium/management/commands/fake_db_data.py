@@ -67,16 +67,12 @@ class Command(BaseCommand):
             astronomy_show = random.choice(astronomy_shows)
             planetarium_dome = random.choice(planetarium_domes)
             show_time = fake.date_time_between(start_date="now", end_date="+30d")
-            if not ShowSession.objects.filter(
-                    planetarium_dome=planetarium_dome,
-                    show_time=show_time
-            ).exists():
-                session = ShowSession.objects.create(
-                    astronomy_show=astronomy_show,
-                    planetarium_dome=planetarium_dome,
-                    show_time=show_time
-                )
-                show_sessions.append(session)
+            session = ShowSession.objects.create(
+                astronomy_show=astronomy_show,
+                planetarium_dome=planetarium_dome,
+                show_time=show_time
+            )
+            show_sessions.append(session)
 
         self.stdout.write(
             self.style.SUCCESS(
@@ -85,21 +81,21 @@ class Command(BaseCommand):
         )
 
         # Create Ticket instances
-        tickets_amount = 0
-        for show_session in show_sessions:
-            rows = show_session.planetarium_dome.rows
-            seats_in_row = show_session.planetarium_dome.seats_in_row
-            for i in range(1, rows + 1):
-                for j in range(1, seats_in_row + 1):
-                    Ticket.objects.create(
-                        row=i,
-                        seat=j,
-                        show_session=show_session,
-                    )
-                    tickets_amount += 1
-
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"Created {tickets_amount} Ticket instances for all show_sessions"
-            )
-        )
+        # tickets_amount = 0
+        # for show_session in show_sessions:
+        #     rows = show_session.planetarium_dome.rows
+        #     seats_in_row = show_session.planetarium_dome.seats_in_row
+        #     for i in range(1, rows + 1):
+        #         for j in range(1, seats_in_row + 1):
+        #             Ticket.objects.create(
+        #                 row=i,
+        #                 seat=j,
+        #                 show_session=show_session,
+        #             )
+        #             tickets_amount += 1
+        #
+        # self.stdout.write(
+        #     self.style.SUCCESS(
+        #         f"Created {tickets_amount} Ticket instances for all show_sessions"
+        #     )
+        # )

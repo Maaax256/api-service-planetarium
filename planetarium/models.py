@@ -89,8 +89,6 @@ class Ticket(models.Model):
         Reservation,
         on_delete=models.SET_NULL,
         related_name="tickets",
-        null=True,
-        blank=True
     )
 
     @staticmethod

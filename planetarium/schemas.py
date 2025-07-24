@@ -70,10 +70,6 @@ ReservationViewSet = extend_schema_view(
         summary="Create a new reservation",
         description="Add a new reservation to the database.",
     ),
-    retrieve=extend_schema(
-        summary="Retrieve a reservation",
-        description="Get details of a specific reservation by ID.",
-    ),
 )(ReservationViewSet)
 
 

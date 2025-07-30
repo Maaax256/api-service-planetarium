@@ -9,7 +9,6 @@ from planetarium.views import (
     PlanetariumDomeViewSet,
     ReservationViewSet,
     ShowSessionViewSet,
-    # TicketViewSet,
 )
 
 
@@ -87,15 +86,3 @@ ShowSessionViewSet = extend_schema_view(
         description="Get details of a specific show session by ID.",
     ),
 )(ShowSessionViewSet)
-
-
-# TicketViewSet = extend_schema_view(
-#     list=extend_schema(
-#         summary="List all tickets",
-#         description="Retrieve a list of all tickets.",
-#     ),
-#     create=extend_schema(
-#         summary="Create a new ticket",
-#         description="Add a new ticket to the database.",
-#     ),
-# )(TicketViewSet)

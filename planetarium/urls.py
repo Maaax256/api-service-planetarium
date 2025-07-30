@@ -6,8 +6,8 @@ from planetarium.schemas import (
     PlanetariumDomeViewSet,
     ReservationViewSet,
     ShowSessionViewSet,
-    # TicketViewSet,
 )
+
 
 app_name = "planetarium"
 
@@ -37,11 +37,6 @@ router.register(
     ShowSessionViewSet,
     basename="show-session"
 )
-# router.register(
-#     "tickets",
-#     TicketViewSet,
-#     basename="ticket"
-# )
 
 urlpatterns = [
     path("", include(router.urls)),

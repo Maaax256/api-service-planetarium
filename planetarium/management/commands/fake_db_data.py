@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from faker import Faker
-from planetarium.models import ShowTheme, AstronomyShow, PlanetariumDome, ShowSession, Ticket
+from planetarium.models import ShowTheme, AstronomyShow, PlanetariumDome, ShowSession
 import random
 
 class Command(BaseCommand):
@@ -12,7 +12,6 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         fake = Faker()
 
-        # Create ShowTheme instances
         show_themes = []
         for _ in range(self.objects_number):
             theme = ShowTheme.objects.create(name=fake.unique.word())
@@ -24,7 +23,6 @@ class Command(BaseCommand):
             )
         )
 
-        # Create AstronomyShow instances
         astronomy_shows = []
         for _ in range(self.objects_number):
             show = AstronomyShow.objects.create(
@@ -45,7 +43,6 @@ class Command(BaseCommand):
             )
         )
 
-        # Create PlanetariumDome instances
         planetarium_domes = []
         for _ in range(self.objects_number):
             dome = PlanetariumDome.objects.create(
@@ -61,7 +58,6 @@ class Command(BaseCommand):
             )
         )
 
-        # Create ShowSession instances
         show_sessions = []
         while len(show_sessions) != self.objects_number:
             astronomy_show = random.choice(astronomy_shows)
@@ -79,23 +75,3 @@ class Command(BaseCommand):
                 f"Created {self.objects_number} ShowSession instances"
             )
         )
-
-        # Create Ticket instances
-        # tickets_amount = 0
-        # for show_session in show_sessions:
-        #     rows = show_session.planetarium_dome.rows
-        #     seats_in_row = show_session.planetarium_dome.seats_in_row
-        #     for i in range(1, rows + 1):
-        #         for j in range(1, seats_in_row + 1):
-        #             Ticket.objects.create(
-        #                 row=i,
-        #                 seat=j,
-        #                 show_session=show_session,
-        #             )
-        #             tickets_amount += 1
-        #
-        # self.stdout.write(
-        #     self.style.SUCCESS(
-        #         f"Created {tickets_amount} Ticket instances for all show_sessions"
-        #     )
-        # )

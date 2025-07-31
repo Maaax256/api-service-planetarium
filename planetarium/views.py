@@ -125,31 +125,30 @@ class ReservationViewSet(
 
 
 class ShowSessionViewSet(viewsets.ModelViewSet):
-    queryset = (
-        ShowSession.objects.all()
-        .select_related("astronomy_show", "planetarium_dome")
-        .annotate(
-            tickets_available=(
-                F("planetarium_dome__rows") * F("planetarium_dome__seats_in_row")
-                - Count("tickets")
-            )
-        )
-    )
     serializer_class = ShowSessionSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
     def get_queryset(self):
         date = self.request.query_params.get("date")
-        movie_id_str = self.request.query_params.get("movie")
+        astronomy_show_id_str = self.request.query_params.get("astronomy_show")
 
-        queryset = self.queryset
+        queryset = (
+            ShowSession.objects.all()
+            .select_related("astronomy_show", "planetarium_dome")
+            .annotate(
+                tickets_available=(
+                        F("planetarium_dome__rows") * F("planetarium_dome__seats_in_row")
+                        - Count("tickets", distinct=True)
+                )
+            )
+        )
 
         if date:
             date = datetime.strptime(date, "%Y-%m-%d").date()
             queryset = queryset.filter(show_time__date=date)
 
-        if movie_id_str:
-            queryset = queryset.filter(movie_id=int(movie_id_str))
+        if astronomy_show_id_str:
+            queryset = queryset.filter(astronomy_show_id=int(astronomy_show_id_str))
 
         return queryset
 

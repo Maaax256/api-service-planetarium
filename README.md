@@ -1,7 +1,14 @@
 # Planetarium API
 
-A Django REST API for managing astronomy shows, show sessions, themes,  
-planetarium domes and booking tickets for shows.
+A Django REST API service for planetarium management,  
+enabling users to browse astronomy shows, explore show themes,   
+view planetarium domes with seating capacity, and book specific  
+seats for show sessions. The system supports secure JWT  
+authentication, user reservation history, and comprehensive  
+admin controls for managing shows, themes, domes, sessions,  
+and reservations. Interactive API documentation is provided via  
+Swagger and ReDoc. Built with Docker, Django REST Framework,  
+and PostgreSQL for robust, scalable deployment.
 
 ## Features
 
@@ -10,7 +17,7 @@ planetarium domes and booking tickets for shows.
 - Viewing lists and retrieving - for all users;
 - Reserving tickets on astronomy show sessions;
 - JWT authentication and authorization;
-- API documentation with Swagger;
+- API documentation with Swagger and ReDoc;
 - Admin resource for system management;
 
 ## Tech Stack
@@ -27,6 +34,7 @@ planetarium domes and booking tickets for shows.
 
 ```bash
     git clone https://github.com/Maaax256/api-service-planetarium.git
+    
     cd api-service-planetarium
 ```
 
@@ -37,7 +45,7 @@ Create .env file and copy variables from .env.sample to .env
 ### 3. Build and start the services
 
 ```bash
-    # To build and and start containers
+    # To build and start containers
     docker-compose up --build
 
     # To run in detached mode (background)
@@ -59,7 +67,7 @@ Create .env file and copy variables from .env.sample to .env
     docker-compose exec app python manage.py createsuperuser
 ```
 
-### . Access the API
+### 6. Access the API
 
 - ReDoc: http://localhost:8080/api/doc/redoc/
 - Swagger: http://localhost:8080/api/doc/swagger/
